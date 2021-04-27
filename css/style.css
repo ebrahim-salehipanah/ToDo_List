@@ -1,0 +1,105 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #d3d3d3;
+}
+
+.header {
+	background: #333;
+	padding: 30px 40px;
+	color: #fff;
+	text-align: center;
+}
+
+.header::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+input[type="text"] {
+	position: relative;
+	border: none;
+	border-radius: 0;
+	width: 75%;
+	padding: 10px;
+	float: left;
+	font-size: 16px;
+	outline: none;
+}
+
+.addBtn {
+	padding: 10px;
+	width: 25%;
+	background: #d9d9d9;
+	color: #555;
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.3s ease;
+	border-radius: 0;
+	font-weight: bold;
+}
+
+.addBtn:hover {
+	background: #bbb;
+}
+
+ol, ul {
+    padding-left: 0;
+}
+
+ul li {
+	position: relative;
+	cursor: pointer;
+	list-style: none;
+	background: #eee;
+	font-size: 18px;
+	padding: 12px 8px 12px 40px;
+	transition: all 0.2s ease;
+	user-select: none; /** can't select text*/
+}
+
+ul li:nth-child(odd) {
+	background: #f9f9f9;
+}
+
+ul li:hover {
+	background: #ddd;
+}
+
+ul li.checked {
+	background: #888;
+	color: #fff;
+	text-decoration: line-through;
+}
+
+ul li.checked::before {
+	content: "";
+	position: absolute;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0 2px 2px 0;
+	top: 10px;
+	left: 16px;
+	transform: rotate(45deg);
+	height: 15px;
+	width: 7px;
+}
+
+.close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 11px 16px;
+}
+
+.close:hover {
+	background: red;
+	color: #fff;
+}
