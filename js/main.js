@@ -20,7 +20,7 @@ list.addEventListener("click", function (event) {
 	}
 });
 
-function newTask() {
+function inputHandler() {
 	var inputValue = document.getElementById("taskInput").value;
 	if (!inputValue) {
 		swal("Error!", "You must write something!", "error");
@@ -34,9 +34,9 @@ function newTask() {
 	}
 }
 
-addBtn.addEventListener("click", newTask);
+addBtn.addEventListener("click", inputHandler);
 document.addEventListener("keypress", function (event) {
 	if (event.key == "Enter") {
-		newTask();
+		inputHandler();
 	}
 });
