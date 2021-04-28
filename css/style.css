@@ -95,8 +95,7 @@ ul li:hover {
 }
 
 ul li.checked {
-	background: rgba(67, 192, 8, 0.719);
-	color: #fff;
+	background: rgba(83, 250, 6, 0.418);
 	text-decoration: line-through;
 }
 
@@ -105,12 +104,12 @@ ul li.checked::before {
 	position: absolute;
 	border-style: solid;
 	border-color: rgba(4, 224, 78, 0.479);
-	border-width: 0 2px 2px 0;
-	top: 10px;
+	border-width: 0 4px 4px 0;
+	top: 50%;
 	left: 16px;
-	transform: rotate(45deg);
-	height: 15px;
-	width: 7px;
+	transform: translateY(-50%) rotate(45deg);
+	height: 20px;
+	width: 10px;
 }
 
 .close {

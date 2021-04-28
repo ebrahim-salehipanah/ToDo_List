@@ -1,13 +1,14 @@
 (function (window) {
-	var todoList = document.querySelector(".todo-list");
-	var addTask = window.Task.addTask;
-
-	for (let i = 0; i < localStorage.length; i++) {
-		let key = localStorage.key(i);
-		let objectData = JSON.parse(localStorage.getItem(key));
-		let taskTitle = objectData.title;
-		let completed = objectData.completed;
-		addTask(todoList, taskTitle, completed);
+	let todoList = document.querySelector(".todo-list");
+	let addTask = window.Task.addTask;
+	//localstorage is not empty
+	if (localStorage.getItem("todo")) {
+		let dataList = JSON.parse(localStorage.getItem("todo"));
+		for (let i = 0; i < dataList.length; i++) {
+			let taskTitle = dataList[i].title;
+			let completed = dataList[i].completed;
+			addTask(todoList, taskTitle, completed);
+		}
 	}
 })(window);
 
@@ -17,26 +18,50 @@ let addBtn = document.querySelector(".addBtn");
 list.addEventListener("click", function (event) {
 	if (event.target.tagName === "LI") {
 		event.target.classList.toggle("checked");
+
+		let taskTitle = event.target.getAttribute("data-target");
+
+		let tasksData = JSON.parse(localStorage.getItem("todo"));
+		for (let i = 0; i < tasksData.length; i++) {
+			if (taskTitle == tasksData[i].title) {
+				tasksData[i].completed = event.target.classList.contains("checked")
+					? true
+					: false;
+			}
+		}
+		localStorage.setItem("todo", JSON.stringify(tasksData));
 	}
 });
 
 function inputHandler() {
-	var inputValue = document.getElementById("taskInput").value;
-	if (!inputValue) {
+	let inputVal = document.getElementById("taskInput").value;
+	let todoList = document.querySelector(".todo-list");
+	let data = localStorage.getItem("todo");
+	let list = [];
+	if (!inputVal) {
 		swal("Error!", "You must write something!", "error");
 	} else {
-		let tmpData = {
-			title: inputValue,
-			completed: false
-		};
-		localStorage.setItem(inputValue, JSON.stringify(tmpData));
-		location.reload();
+		//save on localStorage new Task
+		function TaskObj(title) {
+			this.title = title;
+			this.completed = false;
+		}
+
+		let task = new TaskObj(inputVal);
+
+		//update data
+		if (data) {
+			list = JSON.parse(data);
+		}
+		list.push(task);
+		localStorage.setItem("todo", JSON.stringify(list));
+
+		//create new task element in html
+		window.Task.addTask(todoList, inputVal);
 	}
 }
 
 addBtn.addEventListener("click", inputHandler);
-document.addEventListener("keypress", function (event) {
-	if (event.key == "Enter") {
-		inputHandler();
-	}
-});
+document.addEventListener("keypress", (event) =>
+	event.key == "Enter" ? inputHandler() : null
+);
