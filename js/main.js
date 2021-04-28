@@ -1,38 +1,13 @@
-(function () {
-	function uploadData(txt, completed = false) {
-		let tasks = document.querySelector(".tasks");
-		tasks.appendChild(createLiElement(txt, completed));
-		function createLiElement(txt, completed) {
-			let li = document.createElement("li");
-			let text = document.createTextNode(txt);
-			li.appendChild(text);
-			li.appendChild(createCloseBtn());
-			return li;
-
-			function createCloseBtn() {
-				let span = document.createElement("SPAN");
-				let txt = document.createTextNode("\u00D7");
-				span.className = "close";
-				span.appendChild(txt);
-				span.onclick = closeEventHandler;
-				function closeEventHandler() {
-					const li = this.parentElement;
-					const liText = li.innerText;
-					const key = liText.substring(0, liText.length - 2);
-					localStorage.removeItem(key);
-					li.style.display = "none";
-				}
-				return span;
-			}
-		}
-	}
+(function (window) {
+	var todoList = document.querySelector(".todo-list");
+	var addTask = window.Task.addTask;
 
 	for (let i = 0; i < localStorage.length; i++) {
 		let key = localStorage.key(i);
 		let objectData = JSON.parse(localStorage.getItem(key));
-		let task = objectData.task;
+		let taskTitle = objectData.title;
 		let completed = objectData.completed;
-		uploadData(task, completed);
+		addTask(todoList, taskTitle, completed);
 	}
 })(window);
 
@@ -48,10 +23,10 @@ list.addEventListener("click", function (event) {
 function newTask() {
 	var inputValue = document.getElementById("taskInput").value;
 	if (!inputValue) {
-		alert("You must write something!!!");
+		swal("Error!", "You must write something!", "error");
 	} else {
 		let tmpData = {
-			task: inputValue,
+			title: inputValue,
 			completed: false
 		};
 		localStorage.setItem(inputValue, JSON.stringify(tmpData));
@@ -60,8 +35,8 @@ function newTask() {
 }
 
 addBtn.addEventListener("click", newTask);
-document.addEventListener('keypress',function(event){
-	if(event.key == "Enter"){
-		newTask()
+document.addEventListener("keypress", function (event) {
+	if (event.key == "Enter") {
+		newTask();
 	}
-})
+});

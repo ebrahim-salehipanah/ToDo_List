@@ -50,8 +50,9 @@ input[type="text"] {
 	background: #bbb;
 }
 
-ol, ul {
-    padding-left: 0;
+ol,
+ul {
+	padding-left: 0;
 }
 
 ul li {
@@ -74,7 +75,7 @@ ul li:hover {
 }
 
 ul li.checked {
-	background: #888;
+	background: rgba(67, 192, 8, 0.719);
 	color: #fff;
 	text-decoration: line-through;
 }
@@ -83,7 +84,7 @@ ul li.checked::before {
 	content: "";
 	position: absolute;
 	border-style: solid;
-	border-color: #fff;
+	border-color: rgba(4, 224, 78, 0.479);
 	border-width: 0 2px 2px 0;
 	top: 10px;
 	left: 16px;
@@ -94,8 +95,10 @@ ul li.checked::before {
 
 .close {
 	position: absolute;
+	font-weight: bold;
 	right: 0;
 	top: 0;
+	bottom: 0;
 	padding: 11px 16px;
 }
 
