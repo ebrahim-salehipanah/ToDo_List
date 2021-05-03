@@ -33,9 +33,10 @@
 				const taskTitle = li.getAttribute("data-target");
 				//romove from localStorage
 				let tasksData = JSON.parse(localStorage.getItem("todo"));
-				// TODO : create a function this and main.js:25
+				// TODO : create a function for this and main.js:25 that return index very fast
 				for (let i = 0; i < tasksData.length; i++) {
 					if (taskTitle == tasksData[i].title) {
+						//todo create function delete task 
 						//delete task from aray and store array
 						let lastIndex = tasksData.length - 1;
 						tasksData[i] = tasksData[lastIndex];
@@ -47,6 +48,9 @@
 	
 				li.style.display = "none";
 				swal("Done!", "Your Task Deleted!", "success");
+				let timer = setTimeout(() => {
+					sweetAlert.close();
+				}, 1000);
 			}
 		}
 	};

@@ -125,3 +125,7 @@ ul li.checked::before {
 	background: red;
 	color: #fff;
 }
+
+.sa-button-container{
+	display: none;
+}

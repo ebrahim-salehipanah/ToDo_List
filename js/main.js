@@ -40,6 +40,9 @@ function inputHandler() {
 	let list = [];
 	if (!inputVal) {
 		swal("Error!", "You must write something!", "error");
+		let timer = setTimeout(() => {
+			sweetAlert.close();
+		}, 1000);
 	} else {
 		//save on localStorage new Task
 		function TaskObj(title) {
@@ -58,6 +61,7 @@ function inputHandler() {
 
 		//create new task element in html
 		window.Task.addTask(todoList, inputVal);
+		document.getElementById("taskInput").value = "";
 	}
 }
 
